@@ -5,4 +5,8 @@
     <RootNamespace>FlexibleSelenium.PageElements</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="3.9.1" />
+  </ItemGroup>
+
 </Project>
