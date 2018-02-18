@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{962F7E85-C698-4F11-A54E-63D8FBD32572}</ProjectGuid>
+    <ProjectGuid>{C0E49E4F-BDFB-4974-837C-BCF4F1BD6995}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FlexibleSelenium.IWebElementExtensions.Tests</RootNamespace>
-    <AssemblyName>IWebElementExtensions.Tests</AssemblyName>
+    <RootNamespace>FlexibleSelenium.Tests</RootNamespace>
+    <AssemblyName>FlexibleSelenium.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,13 +43,43 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver, Version=3.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.9.1\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="ByExtensionsTests\ByAttributeNameTests.cs" />
+    <Compile Include="ByExtensionsTests\ByAttributeValueTests.cs" />
+    <Compile Include="ByExtensionsTests\ByHrefTests.cs" />
+    <Compile Include="ByExtensionsTests\ByPartialHrefTests.cs" />
+    <Compile Include="ByExtensionsTests\ByPartialTextAndTagTests.cs" />
+    <Compile Include="ByExtensionsTests\ByPartialTextTests.cs" />
+    <Compile Include="ByExtensionsTests\ByTextAndTagTests.cs" />
+    <Compile Include="ByExtensionsTests\ByTextTests.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="IWebElementExtensionsTests\IWebElementExtensionsTests.cs" />
+    <Compile Include="PageElementsTests\PageElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ByExtensions\ByExtensions.csproj">
+      <Project>{bc8039c6-6c3f-45a0-9d97-1a2334238328}</Project>
+      <Name>ByExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IWebElementExtensions\IWebElementExtensions.csproj">
+      <Project>{e19b75f3-1a3d-429c-a8a5-b614dc6c3c4d}</Project>
+      <Name>IWebElementExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PageElements\PageElements.csproj">
+      <Project>{084a892a-aa38-4966-9a0c-6564d9b9cf83}</Project>
+      <Name>PageElements</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

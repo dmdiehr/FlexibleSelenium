@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("IWebElementExtensions.Tests")]
+[assembly: AssemblyTitle("FlexibleSelenium.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IWebElementExtensions.Tests")]
+[assembly: AssemblyProduct("FlexibleSelenium.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("962f7e85-c698-4f11-a54e-63d8fbd32572")]
+[assembly: Guid("c0e49e4f-bdfb-4974-837c-bcf4f1bd6995")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
