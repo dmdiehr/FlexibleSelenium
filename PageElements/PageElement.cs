@@ -43,13 +43,14 @@ namespace FlexibleSelenium.PageElements
 
         public PageElement(PageElement contextElement, By targetBy, int waitMilliseconds)
         {
+            ThisDriver = contextElement.ThisDriver;
             TargetBy = targetBy;
             Context = contextElement;
             WaitMilliseconds = waitMilliseconds;
         }
 
         /// <summary>
-        /// Only use this constructor if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
+        /// Only use this constructor overload if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
         /// </summary>
         public PageElement(By targetBy)
         {
@@ -60,12 +61,23 @@ namespace FlexibleSelenium.PageElements
         }
 
         /// <summary>
-        /// Only use this constructor if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
+        /// Only use this constructor overload if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
         /// </summary>
         public PageElement(By contextBy, By targetBy)
         {
             ThisDriver = Driver.Instance;
-            Context = new PageElement(targetBy);
+            Context = new PageElement(contextBy);
+            TargetBy = targetBy;
+            WaitMilliseconds = Driver.WaitMilliseconds;
+        }
+
+        /// <summary>
+        /// Only use this constructor overload if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
+        /// </summary>
+        public PageElement(PageElement contextElement, By targetBy)
+        {
+            ThisDriver = Driver.Instance;
+            Context = contextElement;
             TargetBy = targetBy;
             WaitMilliseconds = Driver.WaitMilliseconds;
         }

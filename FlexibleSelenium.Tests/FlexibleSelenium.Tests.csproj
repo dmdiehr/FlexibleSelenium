@@ -79,6 +79,10 @@
       <Project>{084a892a-aa38-4966-9a0c-6564d9b9cf83}</Project>
       <Name>PageElements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StaticDriver\StaticDriver.csproj">
+      <Project>{a73bccb7-99fa-4f84-b73e-f99193f34b56}</Project>
+      <Name>StaticDriver</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

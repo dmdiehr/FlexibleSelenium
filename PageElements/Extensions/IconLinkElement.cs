@@ -8,9 +8,13 @@ namespace FlexibleSelenium.PageElements.Extensions
 {
     public class IconLinkElement : PageElement
     {
-        public IconLinkElement(IWebDriver driver, By targetBy, int waitMilliseconds = 2000) : base(driver, targetBy, waitMilliseconds) { }
+        public IconLinkElement(IWebDriver driver, By targetBy, int waitMilliseconds) : base(driver, targetBy, waitMilliseconds) { }
+        public IconLinkElement(IWebDriver driver, By contextBy, By targetBy, int waitMilliseconds) : base(driver, contextBy, targetBy, waitMilliseconds) { }
+        public IconLinkElement(PageElement contextElement, By targetBy, int waitMilliseconds) : base(contextElement, targetBy, waitMilliseconds){ }
+        public IconLinkElement(By contextBy, By targetBy) : base(contextBy, targetBy) { }
+        public IconLinkElement(By targetBy) : base(targetBy) { }
+        public IconLinkElement(PageElement contextElement, By targetBy) : base(contextElement, targetBy) { }
 
-        public IconLinkElement(IWebDriver driver, By contextBy, By targetBy, int waitMilliseconds = 2000) : base(driver, contextBy, targetBy, waitMilliseconds) { }
 
         /// <summary>
         /// Checks that element's Size is not empty and the visibility value of its CSS.

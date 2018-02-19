@@ -9,4 +9,8 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.9.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StaticDriver\StaticDriver.csproj" />
+  </ItemGroup>
+
 </Project>
