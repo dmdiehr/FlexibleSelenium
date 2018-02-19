@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using FlexibleSelenium.PageElements;
 using OpenQA.Selenium;
+using FlexibleSelenium.StaticDriver;
 
 namespace FlexibleSelenium.Tests
 {
@@ -20,7 +21,7 @@ namespace FlexibleSelenium.Tests
         {
             SetUp();
             IWebElement expectedElement = Driver.FindElement(By.TagName("nav"));
-            PageElement resultElement = new PageElement(Driver.Instance, By.TagName("nav"));
+            PageElement resultElement = new PageElement(Driver.Instance, By.TagName("nav"), Driver.WaitMilliseconds);
 
             Assert.AreEqual(expectedElement, resultElement.BaseElement);
         }
@@ -30,7 +31,7 @@ namespace FlexibleSelenium.Tests
         {
             SetUp();
             IWebElement expectedElement = Driver.FindElement(By.Id("p2"));
-            PageElement resultElement = new PageElement(Driver.Instance, By.Id("div1"), By.TagName("p"));
+            PageElement resultElement = new PageElement(Driver.Instance, By.Id("div1"), By.TagName("p"), Driver.WaitMilliseconds);
 
             Assert.AreEqual(expectedElement, resultElement.BaseElement);
         }
@@ -42,7 +43,7 @@ namespace FlexibleSelenium.Tests
         {
             SetUp();
 
-            var element = new PageElement(Driver.Instance, By.TagName("nav"));
+            var element = new PageElement(Driver.Instance, By.TagName("nav"), Driver.WaitMilliseconds);
 
             Assert.IsTrue(element.IsPresent());
         }
@@ -52,7 +53,7 @@ namespace FlexibleSelenium.Tests
         {
             SetUp();
 
-            var element = new PageElement(Driver.Instance, By.TagName("nasdfav"));
+            var element = new PageElement(Driver.Instance, By.TagName("nasdfav"), Driver.WaitMilliseconds);
 
             Assert.IsFalse(element.IsPresent());
         }

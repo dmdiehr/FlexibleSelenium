@@ -3,6 +3,7 @@ using FlexibleSelenium.ByExtensions;
 using OpenQA.Selenium.Firefox;
 using NUnit.Framework;
 using System;
+using FlexibleSelenium.StaticDriver;
 
 namespace FlexibleSelenium.Tests
 {

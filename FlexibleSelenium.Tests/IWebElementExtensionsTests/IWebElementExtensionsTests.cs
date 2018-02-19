@@ -5,6 +5,7 @@ using OpenQA.Selenium.Firefox;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
+using FlexibleSelenium.StaticDriver;
 
 namespace FlexibleSelenium.Tests
 {

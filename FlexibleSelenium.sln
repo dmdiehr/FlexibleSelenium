@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IWebElementExtensions", "IWebElementExtensions\IWebElementExtensions.csproj", "{E19B75F3-1A3D-429C-A8A5-B614DC6C3C4D}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PageElements", "PageElements\PageElements.csproj", "{084A892A-AA38-4966-9A0C-6564D9B9CF83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlexibleSelenium.Tests", "FlexibleSelenium.Tests\FlexibleSelenium.Tests.csproj", "{C0E49E4F-BDFB-4974-837C-BCF4F1BD6995}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticDriver", "StaticDriver\StaticDriver.csproj", "{A73BCCB7-99FA-4F84-B73E-F99193F34B56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C0E49E4F-BDFB-4974-837C-BCF4F1BD6995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0E49E4F-BDFB-4974-837C-BCF4F1BD6995}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0E49E4F-BDFB-4974-837C-BCF4F1BD6995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73BCCB7-99FA-4F84-B73E-F99193F34B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73BCCB7-99FA-4F84-B73E-F99193F34B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73BCCB7-99FA-4F84-B73E-F99193F34B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73BCCB7-99FA-4F84-B73E-F99193F34B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

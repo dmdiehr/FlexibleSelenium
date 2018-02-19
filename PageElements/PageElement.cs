@@ -3,14 +3,15 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using FlexibleSelenium.StaticDriver;
 
 namespace FlexibleSelenium.PageElements
 {
     public class PageElement : IWebElement
     {
-        private By ContextBy;
+        protected ISearchContext Context { get; }
         private By TargetBy;
-        private IWebDriver Driver;
+        protected IWebDriver ThisDriver { get; }
         public int WaitMilliseconds { get; set; }
         public IWebElement BaseElement => GetBaseElement(WaitMilliseconds);
 
@@ -24,18 +25,49 @@ namespace FlexibleSelenium.PageElements
         public bool Displayed => BaseElement.Displayed;
 
         //Ctors
-        public PageElement(IWebDriver driver, By targetBy, int waitMilliseconds = 2000)
+        public PageElement(IWebDriver driver, By targetBy, int waitMilliseconds)
         {
-            Driver = driver;
+            ThisDriver = driver;
             TargetBy = targetBy;
-            ContextBy = null;
+            Context = driver;
+            WaitMilliseconds = waitMilliseconds;
         }
 
-        public PageElement(IWebDriver driver, By contextBy, By targetBy, int waitMilliseconds = 2000)
+        public PageElement(IWebDriver driver, By contextBy, By targetBy, int waitMilliseconds)
         {
-            Driver = driver;
+            ThisDriver = driver;
             TargetBy = targetBy;
-            ContextBy = contextBy;
+            Context = new PageElement(driver, contextBy, waitMilliseconds);
+            WaitMilliseconds = waitMilliseconds;
+        }
+
+        public PageElement(PageElement contextElement, By targetBy, int waitMilliseconds)
+        {
+            TargetBy = targetBy;
+            Context = contextElement;
+            WaitMilliseconds = waitMilliseconds;
+        }
+
+        /// <summary>
+        /// Only use this constructor if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
+        /// </summary>
+        public PageElement(By targetBy)
+        {
+            ThisDriver = Driver.Instance;
+            Context = Driver.Instance;
+            TargetBy = targetBy;
+            WaitMilliseconds = Driver.WaitMilliseconds;
+        }
+
+        /// <summary>
+        /// Only use this constructor if you are also using FlexibleSelenium.StaticDriver to manage your driver instance
+        /// </summary>
+        public PageElement(By contextBy, By targetBy)
+        {
+            ThisDriver = Driver.Instance;
+            Context = new PageElement(targetBy);
+            TargetBy = targetBy;
+            WaitMilliseconds = Driver.WaitMilliseconds;
         }
 
         protected IWebElement GetBaseElement(int waitMilliseconds)
@@ -50,14 +82,7 @@ namespace FlexibleSelenium.PageElements
                 exceptionThrown = false;
                 try
                 {
-                    if (ContextBy != null)
-                    {
-                        return Driver.FindElement(ContextBy).FindElement(TargetBy);
-                    }
-                    else
-                    {
-                        return Driver.FindElement(TargetBy);
-                    }
+                    return Context.FindElement(TargetBy);
                 }
                 catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverException || ex is StaleElementReferenceException)
                 {
@@ -74,12 +99,9 @@ namespace FlexibleSelenium.PageElements
                 throw new ApplicationException("An unexpected exception has occured in the GetBaseElement method");
         }
 
-
         /// <summary>
         /// Returns false if getting the BaseElement throws an exception. Otherwise it returns the value of the 
-        /// BaseElement.Displayed except if the BaseElement is an anchor tag, in which case it will return 
-        /// the Displayed value of the anchor tags parent (this is so links that are hidden and turned into 
-        /// buttons, etc. will evaluate to true.The ScrollTo() is because EdgeDriver will evaluate Displayed as false 
+        /// BaseElement.Displayed. The browser will scroll to the element because EdgeDriver will evaluate Displayed as false 
         /// if the element is not within view.
         /// </summary>
         public virtual bool IsPresent(int waitMilliseconds)
@@ -88,13 +110,7 @@ namespace FlexibleSelenium.PageElements
             {
                 var baseElement = GetBaseElement(waitMilliseconds);
                 ScrollTo();
-
-                //TODO - find valid way to determine if a-tag elements can be interacted with, i.e. find a way to determine
-                //when an element's Displayed value is false but it has an icon or something else that is clickable.
-                if (baseElement.TagName == "a")
-                    return baseElement.FindElement(By.XPath("..")).Displayed;
-                else
-                    return baseElement.Displayed;
+                return baseElement.Displayed;
             }
             catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverTimeoutException || ex is NullReferenceException)
             {
@@ -116,7 +132,7 @@ namespace FlexibleSelenium.PageElements
         {
             try
             {
-                Actions actions = new Actions(Driver);
+                Actions actions = new Actions(ThisDriver);
                 actions.MoveToElement(BaseElement);
                 actions.Perform();
             }
@@ -127,7 +143,7 @@ namespace FlexibleSelenium.PageElements
             }
         }
 
-        //Methods required to implement ISearchContext
+        //Methods required to implement IWebElement
         public IWebElement FindElement(By by)
         {
             return BaseElement.FindElement(by);
