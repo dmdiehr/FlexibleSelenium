@@ -96,7 +96,7 @@ namespace FlexibleSelenium.PageElements
                 {
                     return Context.FindElement(TargetBy);
                 }
-                catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverException || ex is StaleElementReferenceException)
+                catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverException || ex is StaleElementReferenceException || ex is ElementNotVisibleException)
                 {
                     e = ex;
                     exceptionThrown = true;
