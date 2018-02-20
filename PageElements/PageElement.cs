@@ -108,7 +108,12 @@ namespace FlexibleSelenium.PageElements
             if (exceptionThrown)
             {
                 var newMessage = e.Message + " Exception not resolved within allowed time of: " + waitMilliseconds + " milliseconds";
-                throw new Exception(newMessage, e);
+                if(e is NoSuchElementException)
+                    throw new NoSuchElementException(newMessage, e);
+                if (e is WebDriverException)
+                    throw new WebDriverException(newMessage, e);
+                if (e is StaleElementReferenceException)
+                    throw new StaleElementReferenceException(newMessage, e);
             }
             else
                 throw new ApplicationException("An unexpected exception has occured in the GetBaseElement method");
