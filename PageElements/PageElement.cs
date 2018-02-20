@@ -169,10 +169,37 @@ namespace FlexibleSelenium.PageElements
             return BaseElement.FindElements(by);
         }
 
-        //TODO - delay not visible exception
-        public void Click()
+        public void Click() //Wraps BaseElement.Click around an ElementNotVisibleException catch for the length of WaitMilliseconds
         {
-            BaseElement.Click();
+            var e = new Exception();
+            bool exceptionThrown = false;
+            var startTime = DateTime.Now;
+            var currentTime = startTime;
+
+            while (currentTime.Subtract(startTime).TotalMilliseconds <= WaitMilliseconds)
+            {
+                exceptionThrown = false;
+                try
+                {
+                    BaseElement.Click();
+                    return;
+                }
+                catch (ElementNotVisibleException ex)
+                {
+                    exceptionThrown = true;
+                    e = ex;
+                }
+
+                currentTime = DateTime.Now;
+            }
+
+            if (exceptionThrown)
+            {
+                var newMessage = e.Message + " Exception not resolved within allowed time of: " + WaitMilliseconds + " milliseconds";
+                throw new Exception(newMessage, e);
+            }
+            else
+                throw new ApplicationException("An unexpected exception has occured in BaseElement.Click");
         }
 
         public void Clear()
@@ -180,10 +207,37 @@ namespace FlexibleSelenium.PageElements
             BaseElement.Clear();
         }
 
-        //TODO - delay not visible exception
-        public void SendKeys(string text)
+        public void SendKeys(string text) //Wraps BaseElement.Senkeys around an ElementNotVisibleException catch for the length of WaitMilliseconds
         {
-            BaseElement.SendKeys(text);
+            var e = new Exception();
+            bool exceptionThrown = false;
+            var startTime = DateTime.Now;
+            var currentTime = startTime;
+
+            while (currentTime.Subtract(startTime).TotalMilliseconds <= WaitMilliseconds)
+            {
+                exceptionThrown = false;
+                try
+                {
+                    BaseElement.SendKeys(text);
+                    return;
+                }
+                catch (ElementNotVisibleException ex)
+                {
+                    exceptionThrown = true;
+                    e = ex;
+                }
+
+                currentTime = DateTime.Now;
+            }
+
+            if (exceptionThrown)
+            {
+                var newMessage = e.Message + " Exception not resolved within allowed time of: " + WaitMilliseconds + " milliseconds";
+                throw new Exception(newMessage, e);
+            }
+            else
+                throw new ApplicationException("An unexpected exception has occured in BaseElement.Sendkeys");
         }
 
         public void Submit()

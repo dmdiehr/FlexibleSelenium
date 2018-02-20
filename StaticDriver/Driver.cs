@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using System;
 using System.Collections.ObjectModel;
 
 namespace FlexibleSelenium.StaticDriver
@@ -57,21 +58,37 @@ namespace FlexibleSelenium.StaticDriver
 
         public static void Close()
         {
+            if (Instance == null)
+            {
+                throw new ApplicationException("FlexibileSelenium.StaticDriver.Driver.Instance is null. Please call Driver.Initilalize to create a usable instance");
+            }
             Instance.Close();
         }
 
         public static void GoToUrl(string url)
         {
+            if (Instance == null)
+            {
+                throw new ApplicationException("FlexibileSelenium.StaticDriver.Driver.Instance is null. Please call Driver.Initilalize to create a usable instance");
+            }
             Instance.Navigate().GoToUrl(url);
         }
 
         public static IWebElement FindElement(By by)
         {
+            if (Instance == null)
+            {
+                throw new ApplicationException("FlexibileSelenium.StaticDriver.Driver.Instance is null. Please call Driver.Initilalize to create a usable instance");
+            }
             return Instance.FindElement(by);
         }
 
         public static ReadOnlyCollection<IWebElement> FindElements(By by)
         {
+            if (Instance == null)
+            {
+                throw new ApplicationException("FlexibileSelenium.StaticDriver.Driver.Instance is null. Please call Driver.Initilalize to create a usable instance");
+            }
             return Instance.FindElements(by);
         }
 

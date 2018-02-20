@@ -42,7 +42,7 @@ namespace FlexibleSelenium.Tests
         [Test]
         public void IsPresent_Simple_True()
         {
-            SetUp();
+            SetUp();            
 
             var element = new PageElement(By.TagName("nav"));
 
