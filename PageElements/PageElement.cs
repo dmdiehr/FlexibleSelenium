@@ -96,7 +96,7 @@ namespace FlexibleSelenium.PageElements
                 {
                     return Context.FindElement(TargetBy);
                 }
-                catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverException || ex is StaleElementReferenceException || ex is ElementNotVisibleException)
+                catch (Exception ex) when (ex is NoSuchElementException || ex is WebDriverException || ex is StaleElementReferenceException)
                 {
                     e = ex;
                     exceptionThrown = true;
@@ -106,7 +106,10 @@ namespace FlexibleSelenium.PageElements
             }
 
             if (exceptionThrown)
-                throw e;
+            {
+                var newMessage = e.Message + " Exception not resolved within allowed time of: " + waitMilliseconds + " milliseconds";
+                throw new Exception(newMessage, e);
+            }
             else
                 throw new ApplicationException("An unexpected exception has occured in the GetBaseElement method");
         }
@@ -166,6 +169,7 @@ namespace FlexibleSelenium.PageElements
             return BaseElement.FindElements(by);
         }
 
+        //TODO - delay not visible exception
         public void Click()
         {
             BaseElement.Click();
@@ -176,6 +180,7 @@ namespace FlexibleSelenium.PageElements
             BaseElement.Clear();
         }
 
+        //TODO - delay not visible exception
         public void SendKeys(string text)
         {
             BaseElement.SendKeys(text);

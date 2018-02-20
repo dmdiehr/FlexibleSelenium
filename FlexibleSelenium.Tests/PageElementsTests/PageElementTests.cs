@@ -5,6 +5,7 @@ using NUnit.Framework;
 using FlexibleSelenium.PageElements;
 using OpenQA.Selenium;
 using FlexibleSelenium.StaticDriver;
+using FlexibleSelenium.ByExtensions;
 
 namespace FlexibleSelenium.Tests
 {
@@ -56,6 +57,26 @@ namespace FlexibleSelenium.Tests
             var element = new PageElement(By.TagName("nasdfav"));
 
             Assert.IsFalse(element.IsPresent());
+        }
+
+        [Test]
+        public void Not_Visible_Exception_Caught()
+        {
+            SetUp();
+
+            Driver.GoToUrl("https://kwaylz.kavi.com/higherlogic/mm/account#/accounts");
+
+            var username = Driver.FindElement(By.Id("username"));
+            var password = Driver.FindElement(By.Id("password"));
+            var loginButton = Driver.FindElement(ByExtension.AttributeValue("value", "Login"));
+
+            username.SendKeys("diehrtest+sa1@gmail.com");
+            password.SendKeys("Tester1319");
+            loginButton.Click();
+
+            var logoutButton = new PageElement(ByExtension.PartialHref("logout"));
+
+            logoutButton.Click();
         }
 
     }
