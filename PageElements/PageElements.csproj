@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ByExtensions\ByExtensions.csproj" />
     <ProjectReference Include="..\StaticDriver\StaticDriver.csproj" />
   </ItemGroup>
 

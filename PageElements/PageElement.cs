@@ -4,6 +4,7 @@ using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using FlexibleSelenium.StaticDriver;
+using FlexibleSelenium.ByExtensions;
 
 namespace FlexibleSelenium.PageElements
 {
@@ -271,7 +272,7 @@ namespace FlexibleSelenium.PageElements
 
         public void ClickLink(string linkText)
         {
-            this.FindElement(By.LinkText(linkText)).Click();
+            this.FindElement(ByExtension.TextAndTag(linkText, "a")).Click();
         }
     }
 }
