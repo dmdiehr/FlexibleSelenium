@@ -166,6 +166,7 @@ namespace FlexibleSelenium.PageElements
         }
 
         //Methods required to implement IWebElement
+        #region
         public IWebElement FindElement(By by)
         {
             return BaseElement.FindElement(by);
@@ -265,6 +266,12 @@ namespace FlexibleSelenium.PageElements
         public string GetCssValue(string propertyName)
         {
             return BaseElement.GetCssValue(propertyName);
+        }
+        #endregion
+
+        public void ClickLink(string linkText)
+        {
+            this.FindElement(By.LinkText(linkText)).Click();
         }
     }
 }
