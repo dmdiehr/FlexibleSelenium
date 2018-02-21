@@ -114,6 +114,8 @@ namespace FlexibleSelenium.PageElements
                     throw new WebDriverException(newMessage, e);
                 if (e is StaleElementReferenceException)
                     throw new StaleElementReferenceException(newMessage, e);
+                else
+                    throw new ApplicationException("An unexpected exception has occured in the GetBaseElement method");
             }
             else
                 throw new ApplicationException("An unexpected exception has occured in the GetBaseElement method");
