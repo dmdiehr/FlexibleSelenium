@@ -76,6 +76,5 @@ namespace FlexibleSelenium.Tests
 
             logoutButton.Click();
         }
-
     }
 }
