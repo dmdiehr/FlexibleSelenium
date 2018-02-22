@@ -62,13 +62,11 @@ namespace FlexibleSelenium.Tests
         [Test]
         public void Not_Visible_Exception_Caught()
         {
-            SetUp();
+            SetUp("edge", 9000, "https://kwaylz.kavi.com/higherlogic/mm/account#/accounts");
 
-            Driver.GoToUrl("https://kwaylz.kavi.com/higherlogic/mm/account#/accounts");
-
-            var username = Driver.FindElement(By.Id("username"));
-            var password = Driver.FindElement(By.Id("password"));
-            var loginButton = Driver.FindElement(ByExtension.AttributeValue("value", "Login"));
+            var username = new PageElement(By.Id("username"));
+            var password = new PageElement(By.Id("password"));
+            var loginButton = new PageElement(ByExtension.AttributeValue("value", "Login"));
 
             username.SendKeys("diehrtest+sa1@gmail.com");
             password.SendKeys("Tester1319");

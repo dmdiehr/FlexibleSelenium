@@ -193,7 +193,7 @@ namespace FlexibleSelenium.PageElements
                     BaseElement.Click();
                     return;
                 }
-                catch (ElementNotVisibleException ex)
+                catch (Exception ex) when (ex is ElementNotVisibleException || ex is InvalidOperationException)
                 {
                     exceptionThrown = true;
                     e = ex;
