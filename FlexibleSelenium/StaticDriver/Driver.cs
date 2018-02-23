@@ -102,6 +102,8 @@ namespace FlexibleSelenium.StaticDriver
             {
                 if (element.IsPresent(waitMilliseconds))
                     return;
+
+                currentTime = DateTime.Now;
             }
             throw new WebDriverTimeoutException("The provided element was not present within the allotted time.");
         }
