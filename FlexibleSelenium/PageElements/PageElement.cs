@@ -214,7 +214,16 @@ namespace FlexibleSelenium.PageElements
 
         public void Clear()
         {
-            BaseElement.Clear();
+            try
+            {
+                BaseElement.Clear();
+            }
+            catch (StaleElementReferenceException)
+            {
+
+                BaseElement.Clear(); //One more try
+            }
+
         }
 
         public void SendKeys(string text) //Wraps BaseElement.Senkeys around an ElementNotVisibleException catch for the length of WaitMilliseconds
@@ -252,22 +261,53 @@ namespace FlexibleSelenium.PageElements
 
         public void Submit()
         {
-            BaseElement.Submit();
+            try
+            {
+                BaseElement.Submit();
+            }
+            catch (StaleElementReferenceException)
+            {
+                BaseElement.Submit();//one more try
+            }
+            
         }
 
         public string GetAttribute(string attributeName)
         {
-            return BaseElement.GetAttribute(attributeName);
+            try
+            {
+                return BaseElement.GetAttribute(attributeName);
+            }
+            catch (StaleElementReferenceException)
+            {
+                return BaseElement.GetAttribute(attributeName); //one more try
+            }
+            
         }
 
         public string GetProperty(string propertyName)
         {
-            return BaseElement.GetProperty(propertyName);
+            try
+            {
+                return BaseElement.GetProperty(propertyName);
+            }
+            catch (StaleElementReferenceException)
+            {
+                return BaseElement.GetProperty(propertyName); //one more try
+            }
+            
         }
 
         public string GetCssValue(string propertyName)
         {
-            return BaseElement.GetCssValue(propertyName);
+            try
+            {
+                return BaseElement.GetCssValue(propertyName);
+            }
+            catch (StaleElementReferenceException)
+            {
+                return BaseElement.GetCssValue(propertyName); ;
+            }            
         }
         #endregion
 
@@ -279,7 +319,14 @@ namespace FlexibleSelenium.PageElements
 
         public string GetXPath()
         {
-            return BaseElement.GetXPath();
+            try
+            {
+                return BaseElement.GetXPath();
+            }
+            catch (StaleElementReferenceException)
+            {
+                return BaseElement.GetXPath(); //one more try
+            }
         }
     }
 }
