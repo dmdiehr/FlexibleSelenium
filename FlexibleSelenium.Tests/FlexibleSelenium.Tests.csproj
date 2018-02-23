@@ -65,23 +65,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\ByExtensions\ByExtensions.csproj">
-      <Project>{bc8039c6-6c3f-45a0-9d97-1a2334238328}</Project>
-      <Name>ByExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IWebElementExtensions\IWebElementExtensions.csproj">
-      <Project>{e19b75f3-1a3d-429c-a8a5-b614dc6c3c4d}</Project>
-      <Name>IWebElementExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PageElements\PageElements.csproj">
-      <Project>{084a892a-aa38-4966-9a0c-6564d9b9cf83}</Project>
-      <Name>PageElements</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StaticDriver\StaticDriver.csproj">
-      <Project>{a73bccb7-99fa-4f84-b73e-f99193f34b56}</Project>
-      <Name>StaticDriver</Name>
+    <ProjectReference Include="..\FlexibleSelenium\FlexibleSelenium.csproj">
+      <Project>{731cfc5f-f5b2-43b1-89a6-e31e9c72403c}</Project>
+      <Name>FlexibleSelenium</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

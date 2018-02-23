@@ -6,6 +6,7 @@ using FlexibleSelenium.PageElements;
 using OpenQA.Selenium;
 using FlexibleSelenium.StaticDriver;
 using FlexibleSelenium.ByExtensions;
+using System.Threading;
 
 namespace FlexibleSelenium.Tests
 {
@@ -68,7 +69,9 @@ namespace FlexibleSelenium.Tests
             var password = new PageElement(By.Id("password"));
             var loginButton = new PageElement(ByExtension.AttributeValue("value", "Login"));
 
-            username.SendKeys("diehrtest+sa1@gmail.com");
+            username.Clear();
+            username.SendKeys("diehrtest+sa2@gmail.com");
+            password.Clear();
             password.SendKeys("Tester1319");
             loginButton.Click();
 
