@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using FlexibleSelenium.StaticDriver;
 using FlexibleSelenium.ByExtensions;
+using FlexibleSelenium.IWebElementExtensions;
 
 namespace FlexibleSelenium.PageElements
 {
@@ -270,9 +271,15 @@ namespace FlexibleSelenium.PageElements
         }
         #endregion
 
+
         public void ClickLink(string linkText)
         {
             this.FindElement(ByExtension.TextAndTag(linkText, "a")).Click();
+        }
+
+        public string GetXPath()
+        {
+            return BaseElement.GetXPath();
         }
     }
 }

@@ -6,6 +6,8 @@ using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
 using FlexibleSelenium.StaticDriver;
+using FlexibleSelenium.ByExtensions;
+using FlexibleSelenium.PageElements;
 
 namespace FlexibleSelenium.Tests
 {
