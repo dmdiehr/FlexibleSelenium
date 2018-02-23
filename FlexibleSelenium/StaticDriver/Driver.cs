@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using FlexibleSelenium.PageElements;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
@@ -92,18 +93,34 @@ namespace FlexibleSelenium.StaticDriver
             return Instance.FindElements(by);
         }
 
+        public static void AwaitElement(PageElement element, int waitMilliseconds)
+        {
+            var currentTime = DateTime.Now;
+            var startTime = currentTime;
 
-        //Not sure if these are at all useful, this seems to be the default behavior
+            while (currentTime.Subtract(startTime).TotalMilliseconds <= waitMilliseconds)
+            {
+                if (element.IsPresent(waitMilliseconds))
+                    return;
+            }
+            throw new WebDriverTimeoutException("The provided element was not present within the allotted time.");
+        }
 
-        //public static void WaitForLoad(int waitMilliseconds)
-        //{
-        //    WebDriverWait wait = new WebDriverWait(Instance, new TimeSpan(0, 0, WaitMilliseconds));
-        //    wait.Until(d => ((IJavaScriptExecutor)Instance).ExecuteScript("return document.readyState").Equals("complete"));
-        //}
+        public static void AwaitElement(PageElement element)
+        {
+            AwaitElement(element, WaitMilliseconds);
+        }
 
-        //public static void WaitForLoad()
-        //{
-        //    WaitForLoad(WaitMilliseconds);
-        //}
+        public static void AwaitElement(By by, int waitMilliseconds)
+        {
+            var element = new PageElement(by);
+            AwaitElement(element, waitMilliseconds);
+
+        }
+
+        public static void AwaitElement(By by)
+        {
+            AwaitElement(by, WaitMilliseconds);
+        }
     }
 }
