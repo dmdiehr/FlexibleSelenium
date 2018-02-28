@@ -63,5 +63,10 @@ namespace FlexibleSelenium.ByExtensions
         {
             return new ByChildrenOf(parentBy);
         }
+
+        public static By ChildOf(By parentBy, int childIndex)
+        {
+            return new ByChildOf(parentBy, childIndex);
+        }
     }
 }

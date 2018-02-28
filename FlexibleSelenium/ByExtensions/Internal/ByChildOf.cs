@@ -1,28 +1,36 @@
-﻿using OpenQA.Selenium;
+﻿using FlexibleSelenium.IWebElementExtensions;
+using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 
 namespace FlexibleSelenium.ByExtensions.Internal
 {
-    internal class ByChildrenOf : By
+    internal class ByChildOf : By
     {
         By ParentBy;
+        int ChildIndex;
 
-        public ByChildrenOf(By parentBy)
+        public ByChildOf(By parentBy, int childIndex)
         {
             ParentBy = parentBy;
+            ChildIndex = childIndex;
         }
 
         public override IWebElement FindElement(ISearchContext context)
         {
-            var parentElement = context.FindElement(ParentBy);
-            return parentElement.FindElement(By.XPath("./*"));
+            return FindElements(context)[0];
         }
 
         public override ReadOnlyCollection<IWebElement> FindElements(ISearchContext context)
         {
             var parentElement = context.FindElement(ParentBy);
-            return parentElement.FindElements(By.XPath("./*"));
+            var childrenList = parentElement.FindElements(By.XPath("./*"));
+
+            var singleChildList = new List<IWebElement> { childrenList[ChildIndex] };
+            return singleChildList.AsReadOnly();
         }
 
         public override string ToString()
