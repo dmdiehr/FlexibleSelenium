@@ -53,6 +53,7 @@
     <Compile Include="ByExtensionsTests\ByAttributeNameTests.cs" />
     <Compile Include="ByExtensionsTests\ByAttributeValueTests.cs" />
     <Compile Include="ByExtensionsTests\ByHrefTests.cs" />
+    <Compile Include="ByExtensionsTests\ByChildrenOfTests.cs" />
     <Compile Include="ByExtensionsTests\ByParentOfTests.cs" />
     <Compile Include="ByExtensionsTests\ByPartialHrefTests.cs" />
     <Compile Include="ByExtensionsTests\ByPartialTextAndTagTests.cs" />
