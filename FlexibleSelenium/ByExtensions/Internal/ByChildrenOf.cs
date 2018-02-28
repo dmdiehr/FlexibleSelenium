@@ -4,6 +4,7 @@ using System.Globalization;
 
 namespace FlexibleSelenium.ByExtensions.Internal
 {
+    //TODO - add appropriate exceptions for no results
     internal class ByChildrenOf : By
     {
         By ParentBy;

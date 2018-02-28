@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace FlexibleSelenium.ByExtensions.Internal
 {
+    //TODO - add appropriate exceptions for no results
     internal class ByChildOf : By
     {
         By ParentBy;
