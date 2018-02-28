@@ -53,5 +53,10 @@ namespace FlexibleSelenium.ByExtensions
         {
             return new ByTextAndTag(text, tags);
         }
+
+        public static By ParentOf(By childBy)
+        {
+            return new ByParentOf(childBy);
+        }
     }
 }
