@@ -28,5 +28,25 @@ namespace FlexibleSelenium.Tests
             Assert.AreEqual(secondChild, resultChild);
 
         }
+
+        [Test]
+        public void ChildOf_Out_Of_Range_Throws_No_Such_Element_Exception()
+        {
+            SetUp();
+
+            var e = new Exception();
+ 
+            try
+            {
+                var resultChild = Driver.FindElement(ByExtension.ChildOf(By.TagName("ol"), 5));
+            }
+            catch (Exception ex)
+            {
+
+                e = ex;
+            }
+
+            Assert.IsTrue(e is NoSuchElementException);
+        }
     }
 }

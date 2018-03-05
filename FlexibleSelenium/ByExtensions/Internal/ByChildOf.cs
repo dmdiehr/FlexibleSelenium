@@ -30,6 +30,8 @@ namespace FlexibleSelenium.ByExtensions.Internal
             var parentElement = context.FindElement(ParentBy);
             var childrenList = parentElement.FindElements(By.XPath("./*"));
 
+            if (childrenList.Count < ChildIndex)
+                throw new NoSuchElementException("Unable to locate an child element: ChildIndex = " + ChildIndex + " The element located with the parentBy parameter had " + childrenList.Count + " children elements");
             var singleChildList = new List<IWebElement> { childrenList[ChildIndex] };
             return singleChildList.AsReadOnly();
         }
