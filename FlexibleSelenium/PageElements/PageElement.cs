@@ -328,5 +328,32 @@ namespace FlexibleSelenium.PageElements
                 return BaseElement.GetXPath(); //one more try
             }
         }
+
+        /// <summary>
+        /// Evaluates whether the childElement is both IsPresent and within the scope of this PageElement instance.
+        /// </summary>
+         public bool Contains(PageElement childElement)
+        {
+            if (this.IsPresent(WaitMilliseconds))
+            {
+                if (childElement.IsPresent(WaitMilliseconds))
+                {
+                    var allDesendantElements = this.BaseElement.GetDescendants();
+
+                    return allDesendantElements.Contains(childElement.BaseElement);
+                }
+                else
+                    return false;
+            }
+            else
+                throw new NoSuchElementException("The proposed parent element is not present, and thus cannot contain any children elements");
+
+        }
+
+        public bool Contains(By childBy)
+        {
+            var childElement = new PageElement(childBy);
+            return Contains(childElement);
+        }
     }
 }

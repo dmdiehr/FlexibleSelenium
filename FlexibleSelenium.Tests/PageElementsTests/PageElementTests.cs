@@ -79,5 +79,47 @@ namespace FlexibleSelenium.Tests
 
             logoutButton.Click();
         }
+
+        [Test]
+        [Category("PageElement.Contains")]
+        public void Contains_With_PageElement_True()
+        {
+            SetUp();
+            var parentElement = new PageElement(By.Id("div1"));
+            var childElement = new PageElement(By.Id("p2"));
+
+            Assert.IsTrue(parentElement.Contains(childElement));
+        }
+
+        [Test]
+        [Category("PageElement.Contains")]
+        public void Contains_With_By_True()
+        {
+            SetUp();
+            var parentElement = new PageElement(By.Id("div1"));
+
+            Assert.IsTrue(parentElement.Contains(By.Id("p2")));
+        }
+
+        [Test]
+        [Category("PageElement.Contains")]
+        public void Contains_With_PageElement_False()
+        {
+            SetUp();
+            var parentElement = new PageElement(By.TagName("h1"));
+            var childElement = new PageElement(By.Id("p2"));
+
+            Assert.IsFalse(parentElement.Contains(childElement));
+        }
+
+        [Test]
+        [Category("PageElement.Contains")]
+        public void Contains_With_By_False()
+        {
+            SetUp();
+            var parentElement = new PageElement(By.TagName("h1"));
+
+            Assert.IsFalse(parentElement.Contains(By.Id("p2")));
+        }
     }
 }
