@@ -330,7 +330,7 @@ namespace FlexibleSelenium.PageElements
         }
 
         /// <summary>
-        /// Evaluates whether the childElement is both IsPresent and within the scope of this PageElement instance.
+        /// Evaluates whether the childElement is both IsPresent and within the scope of this PageElement's BaseElement.
         /// </summary>
          public bool Contains(PageElement childElement)
         {

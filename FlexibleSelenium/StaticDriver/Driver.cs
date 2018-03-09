@@ -93,7 +93,7 @@ namespace FlexibleSelenium.StaticDriver
             return Instance.FindElements(by);
         }
 
-        public static void AwaitElement(PageElement element, int waitMilliseconds)
+        public static void AwaitElement(PageElement element, int waitMilliseconds, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             var currentTime = DateTime.Now;
             var startTime = currentTime;
@@ -105,24 +105,24 @@ namespace FlexibleSelenium.StaticDriver
 
                 currentTime = DateTime.Now;
             }
-            throw new WebDriverTimeoutException("The provided element was not present within the allotted time.");
+            throw new AwaitElementException(exceptionMessage);
         }
 
-        public static void AwaitElement(PageElement element)
+        public static void AwaitElement(PageElement element, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
-            AwaitElement(element, WaitMilliseconds);
+            AwaitElement(element, WaitMilliseconds, exceptionMessage);
         }
 
-        public static void AwaitElement(By by, int waitMilliseconds)
+        public static void AwaitElement(By by, int waitMilliseconds, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             var element = new PageElement(by);
-            AwaitElement(element, waitMilliseconds);
+            AwaitElement(element, waitMilliseconds, exceptionMessage);
 
         }
 
-        public static void AwaitElement(By by)
+        public static void AwaitElement(By by, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
-            AwaitElement(by, WaitMilliseconds);
+            AwaitElement(by, WaitMilliseconds, exceptionMessage);
         }
     }
 }
