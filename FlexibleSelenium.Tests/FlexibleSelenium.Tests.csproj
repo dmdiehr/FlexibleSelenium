@@ -64,6 +64,7 @@
     <Compile Include="IWebElementExtensionsTests\IWebElementExtensionsTests.cs" />
     <Compile Include="PageElementsTests\PageElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticDriverTests\StaticDriverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
