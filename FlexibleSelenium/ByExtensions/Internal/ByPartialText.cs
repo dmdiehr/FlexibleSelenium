@@ -11,7 +11,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {
         private string PartialTextToFind;
 
-        public ByPartialText(string partialTextToFind, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
+        internal ByPartialText(string partialTextToFind, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
         {
             if (string.IsNullOrEmpty(partialTextToFind))
             {

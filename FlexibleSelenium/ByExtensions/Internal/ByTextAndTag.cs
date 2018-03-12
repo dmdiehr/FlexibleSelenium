@@ -12,7 +12,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
         private string[] Tags;
         private StringComparison Comparison;
 
-        public ByTextAndTag(string textToFind, params string[] tags)
+        internal ByTextAndTag(string textToFind, params string[] tags)
         {
             if (string.IsNullOrEmpty(textToFind))
             {

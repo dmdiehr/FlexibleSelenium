@@ -12,7 +12,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
         string AttributeName;
         string AttributeValue;
 
-        public ByAttributeValue(string attributeName, string attributeValue)
+        internal ByAttributeValue(string attributeName, string attributeValue)
         {
             if (string.IsNullOrEmpty(attributeName))
             {

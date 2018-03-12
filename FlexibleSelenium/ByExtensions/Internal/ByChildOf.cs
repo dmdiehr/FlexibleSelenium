@@ -14,7 +14,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
         By ParentBy;
         int ChildIndex;
 
-        public ByChildOf(By parentBy, int childIndex)
+        internal ByChildOf(By parentBy, int childIndex)
         {
             ParentBy = parentBy;
             ChildIndex = childIndex;

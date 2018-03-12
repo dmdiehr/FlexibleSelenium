@@ -9,7 +9,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {
         By ParentBy;
 
-        public ByChildrenOf(By parentBy)
+        internal ByChildrenOf(By parentBy)
         {
             ParentBy = parentBy;
         }

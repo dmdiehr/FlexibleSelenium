@@ -8,12 +8,11 @@ using System.Linq;
 
 namespace FlexibleSelenium.ByExtensions.Internal
 {
-    //TODO - add appropriate exceptions for no results
     internal class ByParentOf : By
     {
         By ChildBy;
 
-        public ByParentOf(By childBy)
+        internal ByParentOf(By childBy)
         {
             ChildBy = childBy;
         }

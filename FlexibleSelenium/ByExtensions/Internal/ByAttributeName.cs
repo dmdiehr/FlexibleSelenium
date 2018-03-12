@@ -11,7 +11,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {
         string AttributeName;
 
-        public ByAttributeName(string attributeName)
+        internal ByAttributeName(string attributeName)
         {
             if (string.IsNullOrEmpty(attributeName))
             {

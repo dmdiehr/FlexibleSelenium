@@ -11,7 +11,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {
         string Href;
 
-        public ByHref(string href)
+        internal ByHref(string href)
         {
             if (string.IsNullOrEmpty(href))
             {

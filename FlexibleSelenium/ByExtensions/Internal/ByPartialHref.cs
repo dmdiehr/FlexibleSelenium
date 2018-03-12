@@ -11,7 +11,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {
         string PartialHref;
 
-        public ByPartialHref(string partialHref)
+        internal ByPartialHref(string partialHref)
         {
             if (string.IsNullOrEmpty(partialHref))
             {

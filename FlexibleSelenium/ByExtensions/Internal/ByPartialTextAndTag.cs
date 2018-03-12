@@ -12,7 +12,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
         private string PartialTextToFind;
         private string[] Tags;
 
-        public ByPartialTextAndTag(string partialTextToFind, params string[] tags)
+        internal ByPartialTextAndTag(string partialTextToFind, params string[] tags)
         {
             if (string.IsNullOrEmpty(partialTextToFind))
             {

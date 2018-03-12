@@ -13,7 +13,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
         private string TextToFind;
         StringComparison Comparison;
 
-        public ByText(string textToFind, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
+        internal ByText(string textToFind, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
         {
             if (string.IsNullOrEmpty(textToFind))
             {
