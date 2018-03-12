@@ -22,18 +22,27 @@ namespace FlexibleSelenium.ByExtensions.Internal
 
         public override IWebElement FindElement(ISearchContext context)
         {
-            return FindElements(context)[0];
-        }
-
-        public override ReadOnlyCollection<IWebElement> FindElements(ISearchContext context)
-        {
             var parentElement = context.FindElement(ParentBy);
             var childrenList = parentElement.FindElements(By.XPath("./*"));
 
             if (childrenList.Count < ChildIndex)
                 throw new NoSuchElementException("Unable to locate an child element: ChildIndex = " + ChildIndex + " The element located with the parentBy parameter had " + childrenList.Count + " children elements");
-            var singleChildList = new List<IWebElement> { childrenList[ChildIndex] };
-            return singleChildList.AsReadOnly();
+            return childrenList[ChildIndex];
+        }
+
+        public override ReadOnlyCollection<IWebElement> FindElements(ISearchContext context)
+        {
+            try
+            {
+                var element = FindElement(context);
+                var singleChildList = new List<IWebElement> { element };
+                return singleChildList.AsReadOnly();
+            }
+            catch (NoSuchElementException)
+            {
+
+                return new List<IWebElement>().AsReadOnly();
+            }            
         }
 
         public override string ToString()

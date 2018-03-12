@@ -63,7 +63,7 @@ namespace FlexibleSelenium.Tests
         [Test]
         public void Not_Visible_Exception_Caught()
         {
-            SetUp("edge", 59000, "https://qaprod.kavi.com/higherlogic/mm/account#/accounts");
+            SetUp("edge", 59000, "https://kwaylz.kavi.com/higherlogic/mm/account#/accounts");
 
             var username = new PageElement(By.Id("username"));
             var password = new PageElement(By.Id("password"));
