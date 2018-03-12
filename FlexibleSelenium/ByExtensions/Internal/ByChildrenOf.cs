@@ -1,34 +1,44 @@
-﻿using OpenQA.Selenium;
+﻿using FlexibleSelenium.PageElements;
+using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace FlexibleSelenium.ByExtensions.Internal
 {
-    //TODO - add appropriate exceptions for no results
     internal class ByChildrenOf : By
     {
-        By ParentBy;
+        PageElement ParentElement;
+        int ChildIndex;
 
-        internal ByChildrenOf(By parentBy)
+        internal ByChildrenOf(By parentBy, int childIndex)
         {
-            ParentBy = parentBy;
+            ChildIndex = childIndex;
+            ParentElement = new PageElement(parentBy);
+        }
+
+        internal ByChildrenOf(PageElement parentElement, int childIndex)
+        {
+            ChildIndex = childIndex;
+            ParentElement = parentElement;
         }
 
         public override IWebElement FindElement(ISearchContext context)
         {
-            var parentElement = context.FindElement(ParentBy);
-            return parentElement.FindElement(By.XPath("./*"));
+            var elements = FindElements(context);
+            if (elements.Count <= ChildIndex)
+                throw new NoSuchElementException("Unable to locate an child element: ChildIndex = " + ChildIndex + " The element located with the parentBy parameter had " + elements.Count + " children elements");
+
+            return FindElements(context)[ChildIndex];
         }
 
         public override ReadOnlyCollection<IWebElement> FindElements(ISearchContext context)
         {
-            var parentElement = context.FindElement(ParentBy);
-            return parentElement.FindElements(By.XPath("./*"));
+            return ParentElement.FindElements(By.XPath("./*"));
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "ByChildOf([{0}])", ParentBy);
+            return string.Format(CultureInfo.InvariantCulture, "ByChildOf([{0}])", ParentElement);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
 using FlexibleSelenium.ByExtensions.Internal;
+using FlexibleSelenium.PageElements;
 
 namespace FlexibleSelenium.ByExtensions
 {
@@ -59,14 +60,24 @@ namespace FlexibleSelenium.ByExtensions
             return new ByParentOf(childBy);
         }
 
-        public static By ChildrenOf(By parentBy)
+        /// <summary>
+        /// Finds the children of the provided element.
+        /// </summary>
+        /// <param name="parentElement">The element to search within</param>
+        /// <param name="childIndex">The index of the child element to return when using FindElement. This parameter is not appropriate for the FindElements method and will be ignored when used in that case.</param>
+        public static By ChildrenOf(By parentBy, int childIndex = 0)
         {
-            return new ByChildrenOf(parentBy);
+            return new ByChildrenOf(parentBy, childIndex);
         }
 
-        public static By ChildOf(By parentBy, int childIndex = 0)
+        /// <summary>
+        /// Finds the children of the provided element.
+        /// </summary>
+        /// <param name="parentElement">The element to search within</param>
+        /// <param name="childIndex">The index of the child element to return when using FindElement. This parameter is not appropriate for the FindElements method and will be ignored when used in that case.</param>
+        public static By ChildrenOf(PageElement parentElement, int childIndex = 0)
         {
-            return new ByChildOf(parentBy, childIndex);
+            return new ByChildrenOf(parentElement, childIndex);
         }
     }
 }

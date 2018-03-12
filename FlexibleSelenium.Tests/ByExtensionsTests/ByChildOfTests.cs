@@ -16,21 +16,21 @@ namespace FlexibleSelenium.Tests
         [TestCase("chrome")]
         [TestCase("firefox")]
         [TestCase("edge")]
-        public void ByChildOf_Simple_Crossbrowser(string driver)
+        public void ByChildrenOf_Simple_Crossbrowser(string driver)
         {
             SetUp(driver);
 
             var parentElement = Driver.FindElement(By.TagName("ol"));
             var secondChild = parentElement.FindElement(By.XPath("./li[2]"));
 
-            var resultChild = Driver.FindElement(ByExtension.ChildOf(By.TagName("ol"), 1));
+            var resultChild = Driver.FindElement(ByExtension.ChildrenOf(By.TagName("ol"), 1));
 
             Assert.AreEqual(secondChild, resultChild);
 
         }
 
         [Test]
-        public void ChildOf_Out_Of_Range_Throws_No_Such_Element_Exception()
+        public void ChildrenOf_Out_Of_Range_Throws_No_Such_Element_Exception()
         {
             SetUp();
 
@@ -38,7 +38,7 @@ namespace FlexibleSelenium.Tests
  
             try
             {
-                var resultChild = Driver.FindElement(ByExtension.ChildOf(By.TagName("ol"), 5));
+                var resultChild = Driver.FindElement(ByExtension.ChildrenOf(By.TagName("ol"), 5));
             }
             catch (Exception ex)
             {

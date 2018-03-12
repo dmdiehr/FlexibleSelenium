@@ -1,4 +1,5 @@
 ﻿using FlexibleSelenium.IWebElementExtensions;
+using FlexibleSelenium.PageElements;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -10,28 +11,31 @@ namespace FlexibleSelenium.ByExtensions.Internal
 {
     internal class ByParentOf : By
     {
-        By ChildBy;
+        PageElement ChildElement;
 
         internal ByParentOf(By childBy)
         {
-            ChildBy = childBy;
+            ChildElement = new PageElement(childBy);
+        }
+
+        internal ByParentOf(PageElement childElement)
+        {
+            ChildElement = childElement;
         }
 
         public override IWebElement FindElement(ISearchContext context)
         {
-            var childElement = context.FindElement(ChildBy);
-            return childElement.FindElement(By.XPath(".."));
+            return ChildElement.FindElement(By.XPath(".."));
         }
 
         public override ReadOnlyCollection<IWebElement> FindElements(ISearchContext context)
         {
-            var childElement = context.FindElement(ChildBy);
-            return childElement.FindElements(By.XPath(".."));
+            return ChildElement.FindElements(By.XPath(".."));
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "ByParentOf([{0}])", ChildBy);
+            return string.Format(CultureInfo.InvariantCulture, "ByParentOf([{0}])", ChildElement);
         }
     }
 }
