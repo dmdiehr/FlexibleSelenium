@@ -79,5 +79,15 @@ namespace FlexibleSelenium.ByExtensions
         {
             return new ByChildrenOf(parentElement, childIndex);
         }
+
+        public static By Label(string labelText)
+        {
+            return new ByLabel(labelText);
+        }
+
+        public static By Label(By by)
+        {
+            return new ByLabel(by);
+        }
     }
 }
