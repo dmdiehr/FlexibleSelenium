@@ -69,6 +69,10 @@ namespace FlexibleSelenium.IWebElementExtensions
 
         public static IWebElement GetChild(this ISearchContext context, int childIndex)
         {
+            var children = context.GetChildren();
+
+            if (children.Count <= childIndex)
+                throw new NoSuchElementException("Unable to locate an child element: ChildIndex = " + childIndex + " The context element has a children count of " + children.Count);
             return context.GetChildren()[childIndex];
         }
 

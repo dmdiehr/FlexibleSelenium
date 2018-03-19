@@ -60,6 +60,7 @@
     <Compile Include="ByExtensionsTests\ByPartialTextAndTagTests.cs" />
     <Compile Include="ByExtensionsTests\ByPartialTextTests.cs" />
     <Compile Include="ByExtensionsTests\ByTextAndTagTests.cs" />
+    <Compile Include="ByExtensionsTests\ByLabelTests.cs" />
     <Compile Include="ByExtensionsTests\ByTextTests.cs" />
     <Compile Include="IWebElementExtensionsTests\IWebElementExtensionsTests.cs" />
     <Compile Include="PageElementsTests\PageElementTests.cs" />

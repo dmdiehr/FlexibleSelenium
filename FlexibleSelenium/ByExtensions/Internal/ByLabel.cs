@@ -12,7 +12,6 @@ namespace FlexibleSelenium.ByExtensions.Internal
     {       
         private By LabelBy;
         private string NoSuchElementMessage;
-        StringComparison Comparison;
 
         internal ByLabel(string labelText)
         {
@@ -21,12 +20,12 @@ namespace FlexibleSelenium.ByExtensions.Internal
                 throw new ArgumentException("The text to find cannot be null or empty", "textToFind");
             }
 
-            LabelBy = ByExtension.TextAndTag(labelText.Trim(), "label");
+            LabelBy = ByExtension.TextAndTag(labelText, "label");
         }
 
-        internal ByLabel(By by)
+        internal ByLabel(By labelBy)
         {
-            LabelBy = by;
+            LabelBy = labelBy;
         }
 
         public override IWebElement FindElement(ISearchContext context)
@@ -60,12 +59,13 @@ namespace FlexibleSelenium.ByExtensions.Internal
                 try
                 {
                     var forValue = element.GetAttribute("for");
-                    var referencedElement = context.FindElement(By.Id("forValue"));
+                    var referencedElement = context.FindElement(By.Id(forValue));
                     returnCollection.Add(referencedElement);
                     continue;
                 }
-                catch (NoSuchElementException)
+                catch (Exception ex) when (ex is NoSuchElementException || ex is ArgumentNullException)
                 {
+                    //if the label element has no 'for' attribute, then we should try to find the element embedded within the label
                     try
                     {
                         var childOfLabel = element.GetChild(0);

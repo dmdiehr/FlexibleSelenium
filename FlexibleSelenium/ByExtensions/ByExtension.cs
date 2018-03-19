@@ -85,9 +85,9 @@ namespace FlexibleSelenium.ByExtensions
             return new ByLabel(labelText);
         }
 
-        public static By Label(By by)
+        public static By Label(By labelBy)
         {
-            return new ByLabel(by);
+            return new ByLabel(labelBy);
         }
     }
 }
