@@ -120,10 +120,6 @@ namespace FlexibleSelenium.Tests
             SetUp();
             var parentElement = new PageElement(By.TagName("h1"));
 
-            parentElement.FindElement(By.Id("adsf"));
-
-            parentElement.BaseElement.FindElement(By.Id("ADSF"));
-
             Assert.IsFalse(parentElement.Contains(By.Id("p2")));
         }
     }
