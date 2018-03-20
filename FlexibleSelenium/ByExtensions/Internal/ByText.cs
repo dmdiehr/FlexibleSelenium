@@ -20,7 +20,7 @@ namespace FlexibleSelenium.ByExtensions.Internal
                 throw new ArgumentException("The text to find cannot be null or empty", "textToFind");
             }
 
-            TextToFind = textToFind;
+            TextToFind = textToFind.Trim();
             Comparison = comparison;
         }
 

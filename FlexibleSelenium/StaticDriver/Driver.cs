@@ -57,6 +57,9 @@ namespace FlexibleSelenium.StaticDriver
             }
         }
 
+        /// <summary>
+        /// Close the current window, quitting the browser if it is the last window currently open.
+        /// </summary>
         public static void Close()
         {
             if (Instance == null)
@@ -66,6 +69,9 @@ namespace FlexibleSelenium.StaticDriver
             Instance.Close();
         }
 
+        /// <summary>
+        /// Load a new web page in the current browser window.
+        /// </summary>
         public static void GoToUrl(string url)
         {
             if (Instance == null)
@@ -75,6 +81,10 @@ namespace FlexibleSelenium.StaticDriver
             Instance.Navigate().GoToUrl(url);
         }
 
+        /// <summary>
+        /// Finds the first IWebElement using the given mechanism.
+        /// <see cref="ISearchContext.FindElement(By)"/>
+        /// </summary>
         public static IWebElement FindElement(By by)
         {
             if (Instance == null)
@@ -84,6 +94,10 @@ namespace FlexibleSelenium.StaticDriver
             return Instance.FindElement(by);
         }
 
+        /// <summary>
+        /// Finds all IWebElement within the context using the given mechanism.
+        /// <see cref="ISearchContext.FindElements(By)"/>
+        /// </summary>
         public static ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             if (Instance == null)
@@ -93,6 +107,12 @@ namespace FlexibleSelenium.StaticDriver
             return Instance.FindElements(by);
         }
 
+        /// <summary>
+        /// Waits until the given PageElement is present before proceeding.
+        /// </summary>
+        /// <exception cref="StaticDriver.AwaitElementException">Exception that is thrown if the element is not present within the given wait time</exception>
+        /// <param name="waitMilliseconds">Length of time to wait in milliseconds before throwin an exception</param>
+        /// <param name="exceptionMessage">Exception message that will accompany the AwaitElementException if it is thrown.</param>
         public static void AwaitElement(PageElement element, int waitMilliseconds, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             var currentTime = DateTime.Now;
@@ -108,11 +128,22 @@ namespace FlexibleSelenium.StaticDriver
             throw new AwaitElementException(exceptionMessage);
         }
 
+        /// <summary>
+        /// Waits until the given PageElement is present before proceeding.
+        /// </summary>
+        /// <exception cref="StaticDriver.AwaitElementException">Exception that is thrown if the element is not present within the wait time currently set in the StaticDriver.WaitMilliseconds property</exception>
+        /// <param name="exceptionMessage">Exception message that will accompany the AwaitElementException if it is thrown.</param>
         public static void AwaitElement(PageElement element, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             AwaitElement(element, WaitMilliseconds, exceptionMessage);
         }
 
+        /// <summary>
+        /// Waits until the PageElement instantiated with the provided By is present before proceeding.
+        /// </summary>
+        /// <exception cref="StaticDriver.AwaitElementException">Exception that is thrown if the element is not present within the given wait time</exception>
+        /// <param name="waitMilliseconds">Length of time to wait in milliseconds before throwin an exception</param>
+        /// <param name="exceptionMessage">Exception message that will accompany the AwaitElementException if it is thrown.</param>
         public static void AwaitElement(By by, int waitMilliseconds, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             var element = new PageElement(by);
@@ -120,6 +151,11 @@ namespace FlexibleSelenium.StaticDriver
 
         }
 
+        /// <summary>
+        /// Waits until the PageElement instantiated with the provided By is present before proceeding.
+        /// </summary>
+        /// <exception cref="StaticDriver.AwaitElementException">Exception that is thrown if the element is not present within the wait time currently set in the StaticDriver.WaitMilliseconds property</exception>
+        /// <param name="exceptionMessage">Exception message that will accompany the AwaitElementException if it is thrown.</param>
         public static void AwaitElement(By by, string exceptionMessage = "The provided element was not present within the allotted time.")
         {
             AwaitElement(by, WaitMilliseconds, exceptionMessage);

@@ -1,11 +1,6 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using FlexibleSelenium.ByExtensions;
-using OpenQA.Selenium.Firefox;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using System.Collections.Generic;
 using FlexibleSelenium.StaticDriver;
 
 namespace FlexibleSelenium.Tests
@@ -41,7 +36,7 @@ namespace FlexibleSelenium.Tests
         public void ByLabel_Embedded_Label_By()
         {
             SetUp();
-
+          
             var expectedElement = Driver.FindElement(By.Id("embedded_input"));
             var resultElement = Driver.FindElement(ByExtension.Label(By.Id("for_embedded_input")));
 

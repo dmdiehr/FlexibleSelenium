@@ -142,6 +142,11 @@ namespace FlexibleSelenium.PageElements
             }
         }
 
+        /// <summary>
+        /// Returns false if getting the BaseElement throws an exception. Otherwise it returns the value of the 
+        /// BaseElement.Displayed. The browser will scroll to the element because EdgeDriver will evaluate Displayed as false 
+        /// if the element is not within view.
+        /// </summary>
         public virtual bool IsPresent()
         {
             return IsPresent(WaitMilliseconds);
@@ -169,17 +174,29 @@ namespace FlexibleSelenium.PageElements
 
         //Methods required to implement IWebElement
         #region
+
+        /// <summary>
+        /// Finds the first IWebElement using the given mechanism.
+        /// <see cref="ISearchContext.FindElement(By)"/>
+        /// </summary>
         public IWebElement FindElement(By by)
         {
             return BaseElement.FindElement(by);
         }
 
+        /// <summary>
+        /// Finds all IWebElement within the context using the given mechanism.
+        /// <see cref="ISearchContext.FindElements(By)"/>
+        /// </summary>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return BaseElement.FindElements(by);
         }
 
-        public void Click() //Wraps BaseElement.Click around an ElementNotVisibleException catch for the length of WaitMilliseconds
+        /// <summary>
+        /// Wraps BaseElement.Click within an ElementNotVisibleException and InvalidOperationException catch for the length of WaitMilliseconds
+        /// </summary>
+        public void Click()
         {
             var e = new Exception();
             bool exceptionThrown = false;
@@ -212,6 +229,9 @@ namespace FlexibleSelenium.PageElements
                 throw new ApplicationException("An unexpected exception has occured in BaseElement.Click");
         }
 
+        /// <summary>
+        /// Wraps BaseElement.Clear, will catch a StaleElementReferenceException and try again one time.
+        /// </summary>
         public void Clear()
         {
             try
@@ -221,12 +241,15 @@ namespace FlexibleSelenium.PageElements
             catch (StaleElementReferenceException)
             {
 
-                BaseElement.Clear(); //One more try
+                BaseElement.Clear();
             }
 
         }
 
-        public void SendKeys(string text) //Wraps BaseElement.Senkeys around an ElementNotVisibleException catch for the length of WaitMilliseconds
+        /// <summary>
+        //// Wraps BaseElement.SendKeys within an ElementNotVisibleException and InvalidOperationException catch for the length of WaitMilliseconds
+        /// </summary>
+        public void SendKeys(string text) //
         {
             var e = new Exception();
             bool exceptionThrown = false;
@@ -241,7 +264,7 @@ namespace FlexibleSelenium.PageElements
                     BaseElement.SendKeys(text);
                     return;
                 }
-                catch (ElementNotVisibleException ex)
+                catch (Exception ex) when (ex is ElementNotVisibleException || ex is InvalidOperationException)
                 {
                     exceptionThrown = true;
                     e = ex;
@@ -259,6 +282,9 @@ namespace FlexibleSelenium.PageElements
                 throw new ApplicationException("An unexpected exception has occured in BaseElement.Sendkeys");
         }
 
+        /// <summary>
+        /// Wraps BaseElement.Submit, will catch a StaleElementReferenceException and try again one time.
+        /// </summary>
         public void Submit()
         {
             try
@@ -267,11 +293,14 @@ namespace FlexibleSelenium.PageElements
             }
             catch (StaleElementReferenceException)
             {
-                BaseElement.Submit();//one more try
+                BaseElement.Submit();
             }
             
         }
 
+        /// <summary>
+        /// Wraps BaseElement.GetAttribute, will catch a StaleElementReferenceException and try again one time.
+        /// </summary>
         public string GetAttribute(string attributeName)
         {
             try
@@ -280,11 +309,14 @@ namespace FlexibleSelenium.PageElements
             }
             catch (StaleElementReferenceException)
             {
-                return BaseElement.GetAttribute(attributeName); //one more try
+                return BaseElement.GetAttribute(attributeName);
             }
             
         }
 
+        /// <summary>
+        /// Wraps BaseElement.GetProperty, will catch a StaleElementReferenceException and try again one time.
+        /// </summary>
         public string GetProperty(string propertyName)
         {
             try
@@ -298,6 +330,9 @@ namespace FlexibleSelenium.PageElements
             
         }
 
+        /// <summary>
+        /// Wraps BaseElement.GetCssValue, will catch a StaleElementReferenceException and try again one time.
+        /// </summary>
         public string GetCssValue(string propertyName)
         {
             try
@@ -311,12 +346,18 @@ namespace FlexibleSelenium.PageElements
         }
         #endregion
 
-
+        /// <summary>
+        /// Locates the element based on the linkText argument and performs the Click method on that element
+        /// </summary>
+        /// <remarks>Uses ByExtension.TextAndTag to avoid inconsistent results from By.LinkText</remarks>
         public void ClickLink(string linkText)
         {
             this.FindElement(ByExtension.TextAndTag(linkText, "a")).Click();
         }
 
+        /// <summary>
+        /// Returns a string representation of an XPath query that can be used to find this.BaseElement
+        /// </summary>
         public string GetXPath()
         {
             try
