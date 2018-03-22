@@ -31,12 +31,14 @@ IWebElement foo = Driver.FindElement(ByExtension.Text("bar"));
 
 * For example, you may have a widget, say a filter, that appears in a multitude of locations in the system under test. This filter could have several input fields, checkboxes, radio buttons, and submit and clear buttons. These type of elements will frequently require different locators depending on what page they are on but will usually have the same relationship with a specific base element (in this case maybe a form element). In this case, you can extend the PageElement class to create a FilterElement class that holds, and knows how to locate the various child PageElements. Thus making all the elements in the widget accessible by instantiating one instance (requiring only a single locator) of FilterElement on any page that it may be located.
 
-* The IconLinkElement class is included mainly as an example of how to usefully extend the PageElement class. In this particular case, there was found a situation where the  PageElement.IsPresent method's default behavior was found to be inaccurate. For certain elements, the IWebElement.Displayed value will be false when they are in reality present. (In this case, where a link is being hidden and an icon is shown with css instead.) Thus, this class overrrides the IsPresent method to instead of returning the IWebElement.Displayed value, it returns whether the element is both visible and has a non-emmpty size.
+* The IconLinkElement class is included mainly as an example of how to usefully extend the PageElement class. In this particular case, there was found a situation where the PageElement.IsPresent method was found to be inadequate. For certain elements, the IWebElement.Displayed value will be false when they are in reality present. (In this case, where a link is being hidden and an icon is shown with css instead.) Thus, this class overrrides the IsPresent method to instead of returning the IWebElement.Displayed value, it returns whether the element is both visible and has a non-emmpty size.
 
 #### IWebElementExtensions
 
-* TBD
+* FlexibleSelenium.IWebElementExtensions holds a number of useful (some more than others) extension methods for both IWebElement and ISearchContext. The most noteworthy method is GetXPath which will return the string of an XPath query for the IWebElement. Most other methods in this class are shortcuts for using various XPath queries.
 
 #### StaticDriver
 
-* TBD
+* FlexibleSelenium.StaticDriver holds the Driver class. This is a static class that wraps an instance of an IWebDriver. It also holds several other values that can be used as defaults when running tests. These values and the driver are created by the Driver.Initialize method. 
+
+* To use the Driver class you should include a Driver.Initialize in your test runners SetUp method.
